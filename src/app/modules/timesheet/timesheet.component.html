@@ -1,0 +1,222 @@
+<div id="times" >
+
+
+<div class="card " style="width: auto">
+  <div class="card-header"> <h5 style="font-size: medium;position: relative;margin-top: 10px;" class="card-title">Apply for Leave</h5></div>
+  <mat-divider class="rounded border  "></mat-divider>
+  <div class="card-body rounded border  ">
+    <div class="formbg  " >
+
+      <form   [formGroup]="leaveform" class="form-outline" (ngSubmit)="apply()" class=mr-md-3 (change)="changes()">
+        <div class="row">
+          <div class="col-auto"   >
+            <label for="emplist" class="form-label">Employ Code</label>
+
+            <input class="form-control"  list="emplist" formControlName="leaveempcode" [(ngModel)]="leaveempcode" placeholder="Employ Code" >
+            <datalist id="emplist"  >
+              <option *ngFor="let i of emplist" [value]=i.empcode>{{i.empname}}</option>
+
+            </datalist>
+
+
+
+             <div *ngIf="leaveform.controls['leaveempcode'].invalid && (leaveform.controls['leaveempcode'].touched || leaveform.controls['leaveempcode'].dirty)"class="alert alert-danger">
+              <small>Choose Employ</small>
+            </div>
+          </div>
+
+
+
+            <div class="col-auto">
+              <label >From</label>
+
+                <input   type="date"   class="form-control" formControlName="initialdate" [(ngModel)]="initialdate" >
+                <div *ngIf="leaveform.controls['initialdate'].invalid && (leaveform.controls['initialdate'].touched || leaveform.controls['initialdate'].dirty)"class="alert alert-danger">
+                  <small>Choose From Date</small>
+                </div>
+              </div>
+
+              <div class="col-auto">
+              <label>To</label>
+                  <input  type="date"  class="form-control" formControlName="finaldate" [(ngModel)]="finaldate">
+                  <div *ngIf="leaveform.controls['finaldate'].invalid && (leaveform.controls['finaldate'].touched || leaveform.controls['finaldate'].dirty)"class="alert alert-danger">
+                    <small>Choose End Date</small>
+                  </div>
+
+            </div>
+
+
+
+
+        <div class="col-auto">
+          <label for="exampleDataList" class="form-label"></label>
+          <input class="form-control" list="leaveOptions" id="exampleDataList" formControlName="leavetype" [(ngModel)]="leavetype" placeholder="Leave type">
+          <datalist id="leaveOptions">
+              <option value="Casual Leave">
+              <option value="Sick Leave">
+              <option value="Earned Leave">
+              <option value="Flexi Leave">
+           </datalist>
+           <div *ngIf="leaveform.controls['leavetype'].invalid && (leaveform.controls['leavetype'].touched || leaveform.controls['leavetype'].dirty)"class="alert alert-danger">
+            <small>Choose Leave Type</small>
+          </div>
+        </div>
+        <div class="col-auto">
+          <button type="submit"  class="btn btn-outline-info" [disabled]="!leaveform.valid" [disabled]="edits==true&&edited==false">Apply</button>
+        </div>
+
+      </div>
+
+      </form>
+
+    </div>
+
+
+  </div>
+
+  <div class="card-footer rounded border-light " id="leavesfooter"  >
+
+    <div class="row">
+      <div class="col-md-11"   >
+<h5>  Your Leaves</h5>
+      </div>
+        <div class="col-md-1"   >
+          <button class="btn btn-outline-primary  "    (click)="show()" id="view" >view
+          </button>
+      </div>
+      </div>
+
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+     <div class="accordion-body" *ngIf="showbody"   >
+      <table class="table table-striped  " style="width:auto;" class="col-auto">
+        <thead>
+            <tr>
+
+
+                <th>Employ Code</th>
+                <th>From </th>
+                <th>To</th>
+                <th>Leave Type</th>
+                <th>Status</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let i of empleaves">
+
+
+            <td>{{i.empcode}}</td>
+            <td>{{i.initialdate|date}}</td>
+            <td>{{i.finaldate|date}}</td>
+            <td>{{i.leavetype}}</td>
+            <td>{{i.status}}</td>
+
+
+            <td><button class="btn btn-outline-primary "(click)=edit(i)> Update <mat-icon>edit</mat-icon>  </button></td>
+            <td><button class="btn btn-danger "(click)=del(i) class="btn btn-danger">
+              Cancel <mat-icon>delete_outline</mat-icon>
+                </button></td>
+        </tr>
+
+      </tbody>
+      </table>
+    </div>
+    </div>
+    </div>
+
+
+
+
+  </div>
+</div>
+
+<br>
+
+<div class="card " style="width:auto">
+
+
+  <div class="card-header   border-secondary">
+
+
+  <h5   style="font-size:large; margin-top: 10px;width:fit-content" class="card-title">Timesheet</h5>
+
+
+
+  <div   id="dates" style="position:relative; ">
+
+    <input type="date" class="form-control"    name="maindate" [(ngModel)]="maindate" [value]="maindate" (change)="changesdate()">
+  </div>
+
+</div>
+<div>
+
+</div>
+  <mat-divider   class="rounded border   "  ></mat-divider>
+
+
+
+  <div class="card-body">
+<div  *ngIf="!choosedate">
+  <h5 class="alert alert-info">Choose Date </h5>
+</div>
+<div  class=mr-md-3   *ngIf="choosedate">
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <td>Name</td>
+        <td>No of Hours</td>
+        <td>Leave Type</td>
+        <td>Comments</td>
+      </tr>
+    </thead>
+    <tbody>
+
+        <tr *ngFor="let i of timesheets">
+          <td>{{i.empname}}</td>
+          <td><input type="number" class="form-control"   name="hours" [(ngModel)]="i.hours"    min=0  max="10"  >
+            <div><br>
+                <small *ngIf="i.hours> 10 || i.hours<0 " class="alert alert-danger">Working Hours limits from 0 to 10 </small>
+                <small *ngIf="i.hours==null " class="alert alert-danger">Enter Number of Hours worked</small>
+            </div>
+          </td>
+          <td> <input class="form-control" list="tleaveOptions" id="texampleDataList" name="tleavetype"   [(ngModel)]="i.tleavetype" placeholder="Leave type">
+            <datalist id="tleaveOptions">
+              <option   value="In Work : Out Of Office">
+                  <option value="Casual Leave">
+                    <option value="Sick Leave">
+                    <option value="Earned Leave">
+                    <option value="Flexi Leave">
+
+             </datalist>
+             <div *ngIf="i.hours==0 &&   (i.tleavetype==null||i.tleavetype=='' )"class="alert alert-danger">
+              <small>Choose Leave Type</small>
+            </div>
+
+            <div *ngIf="i.hours>0 &&  (i.tleavetype==null || i.tleavetype=='' )" class="alert alert-info">
+              <small>Choose "In Work : Out Of Office (Optional)"</small>
+            </div>
+
+            </td>
+          <td><textarea type="text" class="form-control"[(ngModel)]="i.comments" name="comments" name="comments" placeholder="Remarks (Optional)" cols="10"
+            rows="3"    ></textarea>
+            <div *ngIf="i.hours ==0 && i.comments==null"class="alert alert-danger">
+              <small>Remarks required while applying for leave</small>
+            </div>
+          </td>
+        </tr>
+
+
+    </tbody>
+    <tfoot>
+<button   (click)="submit()" class="btn   btn-outline-primary" [hidden]="hiddenbtn">Submit</button>
+    </tfoot>
+  </table>
+
+</div>
+
+</div>
+</div>
+</div>
+

@@ -1,0 +1,10 @@
+<app-header (togglesidebarme)="sidebarToggler()" style="background-color: crimson; max-width:100%"></app-header>
+<mat-drawer-container>
+<mat-drawer mode="side" [opened]="sidebaropen">
+  <app-sidebar></app-sidebar>
+</mat-drawer>
+<mat-drawer-content>
+  <router-outlet></router-outlet>
+</mat-drawer-content>
+</mat-drawer-container>
+

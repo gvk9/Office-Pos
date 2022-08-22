@@ -1,0 +1,210 @@
+
+
+
+  <div style="margin-bottom: 100%;height:max-content;width: auto;" class="mx-auto">
+
+    <div class="card text-center ">
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+          <li class="nav-item"  >
+            <a name = "newempbtn" class="nav-link {{tabs}}"  (click)="showform()" >Create Employ</a>
+          </li>
+          <li class="nav-item"  >
+            <a (click)="getapi()" class="nav-link {{tabs2}}">Get Employees Data</a>
+          </li>
+
+        </ul>
+      </div>
+      </div>
+      <div  class="child rounded border" >
+
+        <div *ngIf="empform; then thenBlock else elseBlock"></div>
+
+        <ng-template #thenBlock><form [formGroup]="profileForm" class="form-outline" (ngSubmit)="onsubmit()" class=mr-md-3>
+
+          <h5 class="card-title">Employ Form</h5>
+          <div class="form-row" >
+            <div class="form-group col-md-6 col-form-label">
+              <label for="empname">Name</label>
+              <input type="text" class="form-control"[(ngModel)]="user.empname" formControlName="empname"   id="empname" placeholder="Enter Employ Name"  >
+              <div *ngIf="profileForm.controls['empname'].invalid && (profileForm.controls['empname'].touched || profileForm.controls['empname'].dirty)"class="alert alert-danger">
+                <small>Name is required</small>
+              </div>
+
+            </div>
+
+
+            <div class="form-group col-md-6 col-form-label">
+              <label for="Profile pic">Profile Pic</label>
+              <input type="file" class="form-control" [(ngModel)]="user.profilepic" formControlName="profilepic"    placeholder="Upload Profile Pic"  accept="*.jpeg" >
+            </div>
+        </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-6 col-form-label">
+                <label for="empcode">Code</label>
+                <input type="text" class="form-control"[(ngModel)]="user.empcode" formControlName="empcode" placeholder="Enter Employ Code" >
+                <div *ngIf="profileForm.controls['empcode'].invalid && (profileForm.controls['empcode'].touched || profileForm.controls['empcode'].dirty)"class="alert alert-danger">
+                  <small>Employ Code is required</small>
+                </div>
+              </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-6 col-form-label">
+                  <label for="empphone">Phone Number</label>
+                  <input type="tel" class="form-control"[(ngModel)]="user.empphone" formControlName="empphone" placeholder="Enter Employ Mobile Number" >
+                  <div *ngIf="profileForm.controls['empphone'].invalid && (profileForm.controls['empphone'].touched || profileForm.controls['empphone'].dirty)"class="alert alert-danger">
+                    <small>Employ Mobile Number is required</small>
+                  </div>
+                </div>
+                </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-6 col-form-label">
+                  <label for="empdesig">Designation</label>
+                  <input type="text" class="form-control"[(ngModel)]="user.empdesig" formControlName="empdesig" placeholder="Enter Employ Designation" >
+                  <div *ngIf="profileForm.controls['empdesig'].invalid && (profileForm.controls['empdesig'].touched || profileForm.controls['empdesig'].dirty)"class="alert alert-danger">
+                    <small>Employ Designation is required</small>
+                  </div>
+                </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6 col-form-label">
+                    <label for="empdept">Department</label>
+                    <input type="text" class="form-control"[(ngModel)]="user.empdept" formControlName="empdept" placeholder="Enter Employ Department" >
+                    <div *ngIf="profileForm.controls['empdept'].invalid && (profileForm.controls['empdept'].touched || profileForm.controls['empdept'].dirty)"class="alert alert-danger">
+                      <small>Employ Department is required</small>
+                    </div>
+                  </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group col-md-6 col-form-label">
+                      <label for="empdept">Joining Date</label>
+                      <input type="date" class="form-control"[(ngModel)]="user.empjoindate" formControlName="empjoindate" placeholder="Enter Employ Department" >
+                      <div *ngIf="profileForm.controls['empjoindate'].invalid && (profileForm.controls['empjoindate'].touched || profileForm.controls['empjoindate'].dirty)"class="alert alert-danger">
+                        <small>Select Employ Joining date is required</small>
+                      </div>
+                    </div>
+                    </div>
+
+                  <div class="form-row">
+                    <div class="form-group col-md-6 col-form-label">
+                      <label for="empgender">Gender</label>
+                     <!---- <input type="text" class="form-control"[(ngModel)]="user.emp" formControlName="empgender" placeholder="M of F"> -->
+                      <select formControlName="empgender" class="form-control"[(ngModel)]="user.empgender" placeholder="Choose" >
+
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Others</option>
+                      </select>
+                      <div *ngIf="profileForm.controls['empgender'].invalid && (profileForm.controls['empgender'].touched || profileForm.controls['empgender'].dirty)"class="alert alert-danger">
+                        <small>Gender is required</small>
+                      </div>
+                    </div>
+                    </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6 col-form-label">
+              <label for="empbasicamount">Basic Amount</label>
+              <input type="text" class="form-control"[(ngModel)]="user.empbasicamount" formControlName="empbasicamount" placeholder="10000, Optional* " >
+            </div>
+            </div>
+            <div class="form-row">
+            <div class="form-group col-md-6 col-form-label">
+
+            <label for="Address">Address</label>
+
+           <textarea type="text" class="form-control"[(ngModel)]="user.address" formControlName="address" placeholder="1234 Main St" cols="10"
+           rows="3" style="width:col-md-6"  ></textarea>
+           </div>
+           <div *ngIf="profileForm.controls['address'].invalid && (profileForm.controls['address'].touched || profileForm.controls['address'].dirty)"class="alert alert-danger">
+            <small>Address is required</small>
+          </div>
+          </div>
+          <div class="form-group col-md-6 col-form-label">
+            <label for="State">State</label>
+            <input formControlName="state" list="statelist" class="form-control" [(ngModel)]="user.state" >
+
+            <datalist id="statelist" >
+              <option *ngFor="let i of statelist"  >{{i.state}}</option>
+            </datalist>
+            <div *ngIf="profileForm.controls['state'].invalid && (profileForm.controls['state'].touched || profileForm.controls['state'].dirty)"class="alert alert-danger">
+              <small>State is required</small>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6 col-form-label">
+              <label for="City">City</label>
+              <input type="text" class="form-control" list="statelist" [(ngModel)]="user.city" formControlName="city" placeholder="Enter Employ City">
+              <datalist id="statelist" >
+                <option *ngFor="let i of statelist   " >{{i.city}}</option>
+              </datalist>
+              <div *ngIf="profileForm.controls['city'].invalid && (profileForm.controls['city'].touched || profileForm.controls['city'].dirty)"class="alert alert-danger">
+                <small>City is required</small>
+              </div>
+            </div>
+
+
+            <div class="form-group col-md-6 col-form-label">
+              <label for="zip">Zip</label>
+              <input type="text" class="form-control"[(ngModel)]="user.zip" formControlName="zip" placeholder="Enter 6 digit Zip-code">
+              <div *ngIf="profileForm.controls['zip'].invalid && (profileForm.controls['zip'].touched || profileForm.controls['zip'].dirty)"class="alert alert-danger">
+                <small>Zip is required</small>
+              </div>
+            </div>
+          </div>
+
+
+          <button type="submit" class="btn btn-primary"  [disabled]="!profileForm.valid">Save</button>
+
+        </form>
+        </ng-template>
+
+        <ng-template #elseBlock>
+          <h5  >Employees List</h5>
+          <table class="table table-striped " style="width:auto;" class="col-auto">
+            <thead>
+                <tr>
+
+                    <th>Employ Name</th>
+                    <th>Employ Code</th>
+                    <th>Employ Department</th>
+                    <th>Employ Basic Amount</th>
+
+                </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let i of formdatas">
+
+                <td>{{i.empname}}</td>
+                <td>{{i.empcode}}</td>
+                <td>{{i.empdept}}</td>
+                <td>{{i.empbasicamount}}</td>
+                <td><button class="btn btn-outline-primary "(click)=edit(i)>  <mat-icon>edit</mat-icon></button></td>
+                <td><button class="btn btn-danger "(click)=del(i) class="btn btn-danger">
+                  <mat-icon>delete_outline</mat-icon>
+                    </button></td>
+            </tr>
+
+        </tbody>
+        </table>
+        </ng-template>
+      </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

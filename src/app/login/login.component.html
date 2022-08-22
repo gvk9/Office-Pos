@@ -1,0 +1,54 @@
+
+<br>
+
+<div  class="center"  >
+
+    <div class="card">
+        <div class="card-header bg-transparent border-success"style="margin: 10px;"  ><h3 style="color:#124240e5;text-align: center;">Login</h3></div>
+        <div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="userName" style=" margin-left: 8px;">Username</label>
+                </div>
+                 <div class="col-md-6">
+                    <input type="text" placeholder="Username" style="width:65%; align-self:auto; margin: 5px;"  class="form-control" [(ngModel)]="userName" >
+                </div>
+            </div>
+        </div>
+
+
+
+        <div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="passWord" style="margin-left: 8px;">Password</label>
+                </div>
+                <div class="col-md-6"  >
+                    <input type="password" style="width:65%; margin: 5px;" placeholder="Password" class="form-control" [(ngModel)]="passWord">
+                </div>
+
+            </div>
+        </div>
+
+
+        <br>
+        <div *ngIf ="savebtn" >
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="userName" style=" margin-left: 8px;">Employ Code</label>
+                </div>
+                <div class="col-md-6">
+                    <input   type="text" placeholder="Use Employ Code to register new account" style="width:65%"  class="form-control" [(ngModel)]="empcode" >
+                </div>
+            </div>
+
+        </div>
+
+
+        <button type="submit"class="btn btn-outline-primary" (click)=login() *ngIf  ="registerme">Login</button>
+        <button class="btn btn-outline-primary"   (click)=register() *ngIf  ="registerme">  Register !! </button>
+        <button class="btn btn-outline-primary"   (click)=save() *ngIf ="savebtn">  Save   </button>
+
+     </div>
+</div>
+

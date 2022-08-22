@@ -1,0 +1,55 @@
+:host{
+  .mat-icon{
+    vertical-align:middle;
+    box-align:middle;
+    padding-right:auto;
+    margin-right: auto;
+  }
+  background-color: burlywood;
+
+.mat-divider{
+  border-color: burlywood;
+
+
+}
+.mat-nav-list
+{
+  margin: auto;
+  background-color: rgba(190, 187, 187, 0.24);
+}
+}
+.profile-card{
+  text-align:center;
+  padding:20px;
+  img{
+    width:120px;
+    height: 120px;
+    object-fit: contain;
+    border-radius: 50%;
+  }
+}
+.myfonts {
+  font-family: 'Roboto', sans-serif;
+  font-size:  medium;
+}
+a:hover {
+  color: crimson;
+}
+.card-header-tabs
+{
+margin-top: 10px;
+margin-left: 10px;
+margin-right: 10px;
+padding: 8px;
+padding-right: 10px;
+background-color: white;
+}
+a:active {
+  background-color: crimson;
+  color: whitesmoke;
+}
+ul,li{
+  list-style: none;
+  padding-left: 0%;
+  margin-left: 0%;
+}

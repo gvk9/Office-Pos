@@ -1,0 +1,142 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a  *ngFor="let i of Table_Features_List" class="nav-item nav-link "  (click)="filter( i.Table_Features )">{{i.Table_Features}}</a>
+
+      <a class="nav-link dropdown dropdown-toggle"   id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Filter
+        </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <form class="d-flex">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+          </div>
+
+    </div>
+  </div>
+</nav>
+
+<div class="container px-4">
+  <div class="row mx-auto">
+    <div class="col-4" *ngFor="let i of Table_List">
+
+      <div class="card border-primary text-center" style=" max-width: 18rem ;" (click)="open(i)">
+        <div class="row">
+          <div class="col-auto" >
+            <div class="card-body bg-light "><h5 class="card-text">{{i.Table_id}}</h5></div>
+            <div class="card-footer bg-secondary" *ngIf="i.Table_Status=='Reserved'" ></div>
+            <div class="card-footer bg-danger" *ngIf="i.Table_Status=='Full'" ></div>
+            <div class="card-footer bg-success" *ngIf="i.Table_Status=='Empty' " ></div>
+            <div class="card-footer bg-warning" *ngIf="i.Table_Status=='Billing' ||i.Table_Status=='Confirm' " ></div>
+
+
+          </div>
+
+          <div class="col-auto">
+            <div class="card-body" >
+              <p class="card-text">{{i.Table_Status}}  <span><small *ngIf="i.Table_Status!='Full'"> - Seats: <strong>{{i.no_of_seats}}</strong> </small> </span></p>
+            </div>
+
+      </div>
+      </div>
+
+    </div>
+<div *ngIf="i.table==true">   <div class="card border-primary mb-3 text-center" style="max-width: 18rem; " >
+  <h5 class="card-header">{{i.Table_id}}</h5>
+  <div class="card-body">
+    <p class="card-title">{{i.Table_Feature}}</p>
+    <p class="card-text">Status: {{i.Table_Status}}</p>
+    <p class="card-text">Date: {{i.Table_Booking_Date}}</p>
+    <p class="card-text">Time: {{i.Table_Booking_Time}}</p>
+
+
+    <div *ngIf="i.Table_Status=='Empty'">
+      <div  class="row "  >
+        <div class="col" >
+          <a  (click)="Reserve()" class="btn btn-outline-primary">Add</a>
+          <a  (click)="Reserve()" class="btn btn-outline-success">Reserve</a>
+        </div>
+
+      </div>
+
+
+    </div>
+
+    <div *ngIf="i.Table_Status=='Reserved'">
+      <div  class="row "  >
+        <div class="col" >
+          <a  (click)="Cancel_booking()" class="btn btn-outline-danger">Cancel</a>
+          <a  (click)="Cancel_booking()" class="btn btn-outline-success">confirm</a>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+  <div class="card-footer bg-transparent border-success">Next : {{i.Allocated_To}}</div>
+</div>
+<div class="card border-primary mb-3 text-center" style="max-width: 18rem; " >
+  <h5 class="card-header">{{i.Table_id}}</h5>
+  <div class="card-body">
+    <p class="card-title">{{i.Table_Feature}}</p>
+
+    <mat-form-field class="example-full-width"  >
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker touchUi #picker></mat-datepicker>
+    </mat-form-field>
+
+
+    <div  >
+      <div  class="row "  >
+        <div class="col" >
+          <a  (click)="Save()" class="btn btn-outline-primary">Save</a>
+          <a  (click)="Clear()" class="btn btn-outline-success">Clear</a>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+
+    </div>
+
+
+  </div>
+
+
+</div>
+
+
+<div label="SideList">
+
+
+</div>
+
+
+<nav class="navbar absolute-bottom navbar-light bg-light">
+  <div class="container-fluid">
+    <form class="d-flex">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+
